@@ -1,0 +1,20 @@
+period: 20
+list:
+  CommonMetricPrinter:
+    max_iter: ${solver.max_iter}
+    window_size: 20
+  
+  TensorboardXWriter:
+    log_dir: ${paths.log_dir}
+
+  # WandBWriter:
+  #   log_dir: ${paths.output_dir}
+  #   project: ${project}
+  #   name: ${name}
+  #   id: ${id}
+  # tensorboard:
+  #   a: b
+  #   c: d
+  # wandb:
+  #   e: f
+  #   g: h

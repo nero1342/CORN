@@ -1,0 +1,8 @@
+datasets:
+  train: []
+  test: []
+
+loader:
+  batch_size: 4
+  num_workers: 4
+  

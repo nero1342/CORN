@@ -1,0 +1,5 @@
+_target_: Classifier
+
+defaults:
+  - backbone: swint
+  - criterion: ce

@@ -1,0 +1,14 @@
+defaults: 
+  - swint@_here_
+
+weights: ${paths.root_dir}/weights/swin_base_patch4_window12_384_22k.pth
+
+embed_dim: 128
+depths: [2, 2, 18, 2]
+num_heads: [4, 8, 16, 32]
+window_size: 12
+ape: False
+drop_path_rate: 0.3
+patch_norm: True
+pretrain_img_size: 384
+

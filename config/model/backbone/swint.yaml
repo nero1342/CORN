@@ -1,0 +1,7 @@
+_target_: SwinTransformer
+  
+weights: ${paths.root_dir}/weights/swin_tiny_patch4_window7_224_22k.pth
+embed_dim: 96
+depths: [2, 2, 6, 2]
+num_heads: [3, 6, 12, 24]
+use_checkpoint: True

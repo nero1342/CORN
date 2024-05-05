@@ -1,0 +1,19 @@
+optimizer: AdamW
+
+lr_scheduler: step
+scheduler_gamma: 0.1
+
+base_lr: 1e-3
+weight_decay: 1e-6
+backbone_lr_multiplier: 0.1
+steps:
+  - 2000
+  - 3000
+
+max_iter: 5000
+use_amp: True
+
+checkpoint:
+  period: 100
+  max_to_keep: 10
+  max_iter: ${..max_iter}
