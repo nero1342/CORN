@@ -1,3 +1,2 @@
-from .build import build_model, ARCH_REGISTRY
-
+from .build import ARCH_REGISTRY, build_model
 from .classifier import Classifier

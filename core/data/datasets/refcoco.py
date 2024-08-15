@@ -1,19 +1,19 @@
-import logging
-from typing import Optional, Callable
-import os
-import copy
-from pprint import pprint
-from pycocotools.coco import COCO
-import pycocotools.mask as mask_util
-from fvcore.common.timer import Timer
-import random
-from collections import defaultdict
-import numpy as np 
-from collections import Counter
-import torch
-import io
 import contextlib
+import copy
+import io
+import logging
+import os
+import random
+from collections import Counter, defaultdict
+from pprint import pprint
+from typing import Callable, Optional
+
+import numpy as np
+import pycocotools.mask as mask_util
+import torch
 from detectron2.structures import Boxes, BoxMode, PolygonMasks
+from fvcore.common.timer import Timer
+from pycocotools.coco import COCO
 
 from core.data.datasets import BaseDataset
 
@@ -40,6 +40,7 @@ class RefCOCODataset(BaseDataset):
         self.sample_weight = np.array([len(x['expressions']) for x in self.dataset_dict])# ** 2
 
         self.test = 0
+        
     def _prepare_dataset(self, json_file: str, image_root: str):
         timer = Timer()
         with contextlib.redirect_stdout(io.StringIO()):

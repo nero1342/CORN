@@ -1,9 +1,9 @@
-from omegaconf import DictConfig
-from fvcore.common.registry import Registry 
+import logging
 
 import torch
+from fvcore.common.registry import Registry
+from omegaconf import DictConfig
 from torch import nn
-import logging 
 
 logger = logging.getLogger(__name__)
 

@@ -1,20 +1,20 @@
-import os 
 import logging
-import torch 
+import os
+
 import hydra
+import pyrootutils
+import torch
+from omegaconf import DictConfig, OmegaConf
 from torch import distributed
-from omegaconf import OmegaConf, DictConfig
 
 from core.engine.train_loop import TrainerBase as Trainer
+from core.utils import comm
 from core.utils.utils import extras
 
-import pyrootutils
 pyrootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
 
 local_rank = int(os.environ['LOCAL_RANK'])
 world_size = int(os.environ['WORLD_SIZE'])
-
-from core.utils import comm
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ def logger_setup():
         logging.disable(logging.CRITICAL)
 
 
-@hydra.main(version_base='1.3.2', config_path='config', config_name='default')
+@hydra.main(version_base='1.3.2', config_path='./config', config_name='default')
 def train(cfg: DictConfig):
     # init setup
     logger_setup()

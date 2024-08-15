@@ -1,10 +1,10 @@
-import warnings
 import logging
+import warnings
 from typing import List
-from lightning import Callback 
-from lightning.pytorch.loggers import Logger
 
 import hydra
+from lightning import Callback
+from lightning.pytorch.loggers import Logger
 from omegaconf import DictConfig
 
 from core.utils import rich_utils

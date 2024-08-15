@@ -3,3 +3,5 @@ _target_: Classifier
 defaults:
   - backbone: swint
   - criterion: ce
+
+num_classes: 110

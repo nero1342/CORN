@@ -1,9 +1,12 @@
 from functools import cached_property
-from core.utils.events import get_event_storage
-import wandb 
-import hydra
 
-from . import EventWriter, WRITER_REGISTRY
+import hydra
+import wandb
+
+from core.utils.events import get_event_storage
+
+from . import WRITER_REGISTRY, EventWriter
+
 
 @WRITER_REGISTRY.register()
 class WandBWriter(EventWriter):

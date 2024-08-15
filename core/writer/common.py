@@ -1,14 +1,15 @@
-from typing import Dict, List, Optional
+import datetime
 import logging
-import time 
-import torch 
-import datetime 
+import time
+from typing import Dict, List, Optional
+
 import humanfriendly
+import torch
+from fvcore.common.registry import Registry
 from omegaconf import DictConfig
-from fvcore.common.registry import Registry 
 
 from core.utils.events import get_event_storage
- 
+
 WRITER_REGISTRY = Registry("Writer")
 
 logger = logging.getLogger(__name__)

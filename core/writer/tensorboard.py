@@ -1,7 +1,9 @@
 from functools import cached_property
+
 from core.utils.events import get_event_storage
 
 from . import WRITER_REGISTRY, EventWriter
+
 
 @WRITER_REGISTRY.register()
 class TensorboardXWriter(EventWriter):

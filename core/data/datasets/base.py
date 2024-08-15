@@ -1,13 +1,13 @@
-from typing import Optional, List, Callable, Any
 import io
 from pathlib import Path
+from typing import Any, Callable, List, Optional
 
 import cv2
 import numpy as np
 import torch
 from PIL import Image
-
 from torch.utils.data import Dataset
+
 
 class BaseDataset(Dataset):
     def __init__(self, transform: Optional[Callable] = None, **kwargs) -> None:
@@ -24,9 +24,10 @@ class BaseDataset(Dataset):
         """
 
         if read_mode == "pillow":
-            if not isinstance(image, (str, Path)):
-                image = io.BytesIO(image)
-            image = np.asarray(Image.open(image).convert("RGB"))
+            # if not isinstance(image, (str, Path)):
+            #     image = io.BytesIO(image)
+            # image = np.asarray(Image.open(image).convert("RGB"))
+            image = np.asarray(image)
         elif read_mode == "cv2":
             if not isinstance(image, (str, Path)):
                 image = np.frombuffer(image, np.uint8)

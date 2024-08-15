@@ -1,10 +1,9 @@
-from typing import List 
-import logging 
-
-from .base import HookBase
+import logging
+from typing import List
 
 from core.writer import EventWriter
-from core.utils.events import get_event_storage
+
+from .base import HookBase
 
 logger = logging.getLogger(__name__)
 
@@ -16,8 +15,7 @@ class PeriodWriter(HookBase):
         self.period = period 
 
     def after_step(self):
-        storage = get_event_storage()
-        cur_iter = storage.iter
+        cur_iter = self.storage.iter
         if (cur_iter + 1) % self.period == 0:
             for writer in self.writers:
                 writer.write()

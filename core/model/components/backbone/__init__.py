@@ -1,3 +1,2 @@
-from .build import build_backbone, BACKBONE_REGISTRY
-
+from .build import BACKBONE_REGISTRY, build_backbone
 from .swin import SwinTransformer

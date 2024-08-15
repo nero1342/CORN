@@ -1,30 +1,32 @@
-# import torch
-# import logging 
-# from torch.utils.data import Dataset
+from typing import Dict
+import torch
+import logging 
+from torch.utils.data import Dataset
+import copy 
 
-# logger = logging.getLogger(__name__)
+from omegaconf import DictConfig
+from fvcore.common.registry import Registry 
 
-# def build_dataset(name):
+from core.data.builtin import PREDEFINED_DATASETS
+logger = logging.getLogger(__name__)
 
-# from omegaconf import DictConfig
-# from fvcore.common.registry import Registry 
+DATASET_REGISTRY = Registry("Dataset")
 
-# import torch
-# from torch import nn
-# import logging 
-
-# logger = logging.getLogger(__name__)
-
-# BACKBONE_REGISTRY = Registry("Backbone")
-
-# def build_dataset(dataset_name: DictConfig) -> Dataset:
-#     dataset_name = cfg.pop('_target_')
-#     logger.info(f"Instantiating backbone <{backbone_name}>")
-#     backbone = BACKBONE_REGISTRY.get(backbone_name)(**cfg)
+def build_dataset(dataset_name: str) -> Dataset:
+    assert dataset_name in PREDEFINED_DATASETS, f"Dataset {dataset_name} is not defined, check file builtin.py"
+    assert "dataset" in PREDEFINED_DATASETS[dataset_name], f"Dataset {dataset_name} do not contain dataset field, check file builtin.py"
     
-#     return backbone
+    cfg = copy.deepcopy(PREDEFINED_DATASETS[dataset_name]["dataset"])
+    dataset_type = cfg.pop('_target_')
+    logger.info(f"Instantiating dataset <{dataset_name}> : <{dataset_type}>")
+    dataset = DATASET_REGISTRY.get(dataset_type)(**cfg)
 
-# def build_datasets(cfg):
-#     dataset_names = cfg.datasets.train
-#     datasets = []
-#     for dataset_name in dataset_names:
+    return dataset
+
+def build_datasets(dataset_names):
+    datasets = [build_dataset(dataset_name) for dataset_name in dataset_names]
+
+    if len(datasets) == 1:
+       return datasets[0]
+    
+    return ConcatDataset(datasets)

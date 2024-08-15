@@ -1,9 +1,11 @@
-import logging
-import torch 
-from torch import nn
-import time
 import datetime
+import logging
+import time
+
+import torch
 from fvcore.common.timer import Timer
+from torch import nn
+
 from core.utils.events import get_event_storage
 
 from .base import HookBase
@@ -34,12 +36,6 @@ class IterationTimer(HookBase):
         self._total_timer = Timer()
 
         self._num_iter = 0
-
-    @property
-    def storage(self):
-        if "_storage" not in self.__dict__:
-            self._storage = get_event_storage()
-        return self._storage
 
     def before_train(self):
         self._start_time = time.perf_counter()

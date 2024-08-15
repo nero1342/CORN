@@ -1,13 +1,13 @@
+import logging
+
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint as checkpoint
-import numpy as np
 from timm.models.layers import DropPath, to_2tuple, trunc_normal_
 
 from . import BACKBONE_REGISTRY
-
-import logging 
 
 logger = logging.getLogger(__name__)
 

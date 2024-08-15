@@ -1,6 +1,8 @@
+from core.utils.events import get_event_storage
+
 class HookBase:
     """
-    Base class for hooks that can be registered with :class:`TrainerBase`.
+    Base class for hooks.
 
     Each hook can implement 4 methods. The way they are called is demonstrated
     in the following snippet:
@@ -14,11 +16,7 @@ class HookBase:
         hook.after_train()
 
     Notes:
-        1. In the hook method, users can access ``self.trainer`` to access more
-           properties about the context (e.g., model, current iteration, or config
-           if using :class:`DefaultTrainer`).
-
-        2. A hook that does something in :meth:`before_step` can often be
+        1. A hook that does something in :meth:`before_step` can often be
            implemented equivalently in :meth:`after_step`.
            If the hook takes non-trivial time, it is strongly recommended to
            implement the hook in :meth:`after_step` instead of :meth:`before_step`.
@@ -30,10 +28,12 @@ class HookBase:
 
     """
 
-    trainer: "TrainerBase" = None
-    """
-    A weak reference to the trainer object. Set by the trainer when the hook is registered.
-    """
+
+    @property
+    def storage(self):
+        if "_storage" not in self.__dict__:
+            self._storage = get_event_storage()
+        return self._storage
 
     def before_train(self):
         """
@@ -50,12 +50,6 @@ class HookBase:
     def before_step(self):
         """
         Called before each iteration.
-        """
-        pass
-
-    def after_backward(self):
-        """
-        Called after the backward pass of each iteration.
         """
         pass
 

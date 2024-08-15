@@ -12,7 +12,6 @@ from rich.prompt import Prompt
 
 logger = logging.getLogger(__name__)
 
-
 @rank_zero_only
 def print_config_tree(
     cfg: DictConfig,

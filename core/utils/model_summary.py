@@ -47,7 +47,8 @@ def to_bytes(dtype) -> int:
 
 
 def model_summary(model: torch.nn.Module) -> str:
-    message = f"Model structure:\n{model}"
+    message = ""
+    # message = f"Model structure:\n{model}"
     # from fvcore.nn import parameter_count_table
     # message += parameter_count_table(model)
     # message += str(model)

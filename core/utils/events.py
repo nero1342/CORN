@@ -7,6 +7,7 @@ import time
 from collections import defaultdict
 from contextlib import contextmanager
 from typing import Optional
+
 import torch
 from fvcore.common.history_buffer import HistoryBuffer
 

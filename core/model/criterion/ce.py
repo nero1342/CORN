@@ -1,8 +1,9 @@
-import torch 
+import torch
+import torch.nn.functional as F
 from torch import nn
-import torch.nn.functional as F 
 
 from .build import CRITERION_REGISTRY
+
 
 @CRITERION_REGISTRY.register()
 class CrossEntropy(nn.Module):

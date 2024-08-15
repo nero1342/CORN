@@ -1,4 +1,5 @@
-import logging 
+import logging
+
 import torch
 from omegaconf import DictConfig
 

@@ -1,14 +1,15 @@
 import logging
-from omegaconf import DictConfig 
 
 import torch
-from torch.utils.data import Dataset, DataLoader
+from omegaconf import DictConfig
+from torch.utils.data import DataLoader, Dataset, DistributedSampler
 
 from core.utils import comm
-from .datasets import build_datasets
+
+from .datasets import build_datasets, build_dataset
 
 def build_train_dataloader(cfg: DictConfig):
-    dataset = build_datasets(cfg.dataset.train)
+    dataset = build_datasets(cfg.datasets.train)
     
     sampler = DistributedSampler(dataset) # if is_distributed else None
     loader = DataLoader(
@@ -16,8 +17,19 @@ def build_train_dataloader(cfg: DictConfig):
         batch_size=cfg.loader.batch_size,
         num_workers=cfg.loader.num_workers,
         sampler=sampler,
-        shuffle=True,
+        # shuffle=True,
         drop_last=True, 
     )
 
-    return loader
+    return sampler, loader
+
+def build_test_dataloader(cfg, dataset_name: str):
+    # return None 
+    dataset = build_dataset(dataset_name) 
+    return DataLoader(
+        dataset,
+        batch_size=cfg.loader.batch_size,
+        num_workers=cfg.loader.num_workers,
+        drop_last=False,
+    )
+

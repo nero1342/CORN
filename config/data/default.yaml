@@ -1,8 +1,8 @@
 datasets:
-  train: []
-  test: []
+  train: [pokemon]
+  test: [pokemon, pokemon]
 
 loader:
-  batch_size: 4
+  batch_size: 64
   num_workers: 4
   
